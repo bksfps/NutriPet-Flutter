@@ -10,7 +10,9 @@ class TelaCadastro extends StatefulWidget {
 }
 
 class _TelaCadastroState extends State<TelaCadastro> {
+  TextEditingController _nomeTextController = TextEditingController();
   TextEditingController _userNameTextController = TextEditingController();
+  TextEditingController _responsavelTextController = TextEditingController();
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
   @override
@@ -35,6 +37,10 @@ class _TelaCadastroState extends State<TelaCadastro> {
               const SizedBox(
                 height: 20,
               ),
+              textReusavel("Coloque seu Nome", Icons.person_outline, false, _nomeTextController),
+              const SizedBox(
+                height: 20,
+              ),
               textReusavel("Coloque Usuário", Icons.person_outline, false, _userNameTextController),
               const SizedBox(
                 height: 20,
@@ -44,6 +50,10 @@ class _TelaCadastroState extends State<TelaCadastro> {
                 height: 20,
               ),
               textReusavel("Coloque Senha", Icons.person_outline, true, _passwordTextController),
+              const SizedBox(
+                height: 20,
+              ),
+              textReusavel("Coloque Nome do Responsável", Icons.person_outline, false, _responsavelTextController),
               const SizedBox(
                 height: 20,
               ),
