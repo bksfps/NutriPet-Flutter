@@ -1,5 +1,3 @@
-//parte gráfica da tela do ovo
-
 import 'package:flutter/material.dart';
 import 'package:nutripet1/pet.dart';
 import 'package:nutripet1/petlog.dart';
@@ -9,16 +7,16 @@ class SelecaoOvosScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Seleção de Ovos'),
-      ),
+      backgroundColor: Colors.green, // Definindo a cor de fundo como verde
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _buildPetTypeButton(context, 'Dinossauro', PetType.dinossauro),
-            _buildPetTypeButton(context, 'Dragão', PetType.dragao),
-            _buildPetTypeButton(context, 'Gato', PetType.gato),
+            _buildPetTypeButton(context, 'DINOSSAURO', PetType.dinossauro),
+            SizedBox(height: 20), // Adicionando espaçamento entre os botões e os textos
+            _buildPetTypeButton(context, 'DRAGON', PetType.dragao),
+            SizedBox(height: 20), // Adicionando espaçamento entre os botões e os textos
+            _buildPetTypeButton(context, 'UNICORNIO', PetType.unicornio),
           ],
         ),
       ),
@@ -29,9 +27,20 @@ class SelecaoOvosScreen extends StatelessWidget {
       BuildContext context, String typeName, PetType type) {
     return Column(
       children: [
-        Text(typeName),
+        Text(
+          typeName,
+          style: TextStyle(
+            fontSize: 20, // Aumentando o tamanho do texto
+            fontFamily: 'PixelatedDisplay', // Nome da fonte pixelizada
+          ),
+        ),
+        SizedBox(height: 10), // Adicionando espaçamento entre o texto e o botão
         ElevatedButton(
           onPressed: () => _selectPet(context, type),
+          style: ElevatedButton.styleFrom(
+            foregroundColor: Colors.black, backgroundColor: Colors.transparent, // Cor do texto
+            side: BorderSide(color: Colors.black), // Cor da borda
+          ),
           child: SizedBox(
             height: 80,
             width: 100,
@@ -48,11 +57,11 @@ class SelecaoOvosScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Digite o nome do pet'),
+          title: Text('DIGITE O NOME DO PET', style: TextStyle(fontFamily: 'PixelatedDisplay', color: Colors.black)), // Aplicando a fonte PixelatedDisplay e cor do texto
           content: TextField(
             controller: nameController,
             decoration: InputDecoration(
-              hintText: 'Nome',
+              hintText: 'NOME',
             ),
           ),
           actions: <Widget>[
@@ -60,14 +69,20 @@ class SelecaoOvosScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cancelar'),
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.black, // Cor do texto
+              ),
+              child: Text('CANCELAR'), // Não é necessário aplicar a fonte aqui, pois a cor do texto já foi definida acima
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
                 _navigateToExibicaoPetScreen(context, type, nameController.text);
               },
-              child: Text('Confirmar'),
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.black, // Cor do texto
+              ),
+              child: Text('CONFIRMAR'), // Não é necessário aplicar a fonte aqui, pois a cor do texto já foi definida acima
             ),
           ],
         );

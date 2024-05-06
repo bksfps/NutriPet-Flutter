@@ -37,23 +37,23 @@ class _TelaCadastroState extends State<TelaCadastro> {
               const SizedBox(
                 height: 20,
               ),
-              textReusavel("Coloque seu Nome", Icons.person_outline, false, _nomeTextController),
+              textReusavel("Coloque seu Nome", Icons.person_outline, false, _nomeTextController, fontFamily: 'Bold'),
               const SizedBox(
                 height: 20,
               ),
-              textReusavel("Coloque Usuário", Icons.person_outline, false, _userNameTextController),
+              textReusavel("Coloque Usuário", Icons.person_outline, false, _userNameTextController, fontFamily: ''),
               const SizedBox(
                 height: 20,
               ),
-              textReusavel("Coloque Email", Icons.person_outline, false, _emailTextController),
+              textReusavel("Coloque Email", Icons.email, false, _emailTextController, fontFamily: ''),
               const SizedBox(
                 height: 20,
               ),
-              textReusavel("Coloque Senha", Icons.person_outline, true, _passwordTextController),
+              textReusavel("Coloque Senha", Icons.lock_outline, true, _passwordTextController, fontFamily: ''),
               const SizedBox(
                 height: 20,
               ),
-              textReusavel("Coloque Nome do Responsável", Icons.person_outline, false, _responsavelTextController),
+              textReusavel("Coloque Nome do Responsável", Icons.emoji_people, false, _responsavelTextController, fontFamily: ''),
               const SizedBox(
                 height: 20,
               ),

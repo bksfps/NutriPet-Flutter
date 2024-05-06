@@ -10,7 +10,7 @@ Image logoWidget(String imageName) {
 }
 
 TextField textReusavel(String text, IconData icon, bool isPasswordType,
-    TextEditingController controller) {
+    TextEditingController controller, {required String fontFamily}) {
   return TextField(
       controller: controller,
       obscureText: isPasswordType,

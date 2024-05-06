@@ -3,7 +3,7 @@
 enum PetType {
   dinossauro,
   dragao,
-  gato,
+  unicornio,
 }
 
 class Pet {

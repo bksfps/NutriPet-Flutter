@@ -56,8 +56,11 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Nome do Pet: ${_pet.name}',
-                    style: TextStyle(fontSize: 15),
+                    '${_pet.name.toUpperCase()}', // Convertendo para maiúsculo
+                    style: TextStyle(
+                      fontSize: 20, // Aumentando o tamanho da fonte do nome do pet
+                      fontFamily: 'PixelatedDisplay', // Aplicando a fonte PixelatedDisplay
+                    ),
                   ),
                   SizedBox(height: 20),
                   Image.asset(_getImagePath()),
@@ -71,15 +74,21 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
             left: 0,
             right: 0,
             child: Container(
-              color: Color.fromARGB(255, 255, 255, 255),
-              padding: EdgeInsets.all(6),
-              child: Column(
-                children: [
-                  _buildProgressBar('Alimentação', _pet.alimentacao),
-                  _buildProgressBar('Felicidade', _pet.felicidade),
-                  _buildProgressBar('Energia', _pet.energia),
-                  _buildProgressBar('Força', _pet.forca),
-                ],
+              height: 210, // Aumentando a altura do container
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black, width: 4), // Aumentando a grossura da borda preta
+              ),
+              child: Container(
+                color: Colors.green, // Definindo a cor do container
+                padding: EdgeInsets.all(6),
+                child: Column(
+                  children: [
+                    _buildProgressBar('ALIMENTAÇÃO', _pet.alimentacao),
+                    _buildProgressBar('FELICIDADE', _pet.felicidade),
+                    _buildProgressBar('ENERGIA', _pet.energia),
+                    _buildProgressBar('FORÇA', _pet.forca),
+                  ],
+                ),
               ),
             ),
           ),
@@ -96,13 +105,13 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Nome do Pet: ${_pet.name}'),
-                  Text('Nível do Pet: ${_pet.level}'),
+                  Text('NOME DO PET: ${_pet.name.toUpperCase()}', style: TextStyle(fontFamily: 'PixelatedDisplay')), // Aplicando a fonte PixelatedDisplay e convertendo para maiúsculo
+                  Text('NÍVEL DO PET: ${_pet.level}'.toUpperCase(), style: TextStyle(fontFamily: 'PixelatedDisplay')), // Aplicando a fonte PixelatedDisplay e convertendo para maiúsculo
                 ],
               ),
             ),
             ListTile(
-              title: const Text('Alimentar'),
+              title: const Text('ALIMENTAR', style: TextStyle(fontFamily: 'PixelatedDisplay')), // Aplicando a fonte PixelatedDisplay
               onTap: () {
                 Navigator.push(
                   context,
@@ -143,7 +152,10 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
                     alignment: Alignment.center,
                     child: Text(
                       '$value',
-                      style: TextStyle(fontSize: 8),
+                      style: TextStyle(
+                        fontSize: 10, // Aumentando o tamanho do texto
+                        fontFamily: 'PixelatedDisplay', // Aplicando a fonte PixelatedDisplay
+                      ),
                     ),
                   ),
                 ),
@@ -153,7 +165,11 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
           SizedBox(height: 5),
           Text(
             '$label',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 8),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 11, // Aumentando o tamanho do texto
+              fontFamily: 'PixelatedDisplay', // Aplicando a fonte PixelatedDisplay
+            ),
           ),
         ],
       ),
@@ -166,7 +182,7 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
         return 'assets/pet_dinossauro.png';
       case PetType.dragao:
         return 'assets/pet_dragao.png';
-      case PetType.gato:
+      case PetType.unicornio:
         return 'assets/pet_gato.png';
       default:
         return '';
@@ -179,7 +195,7 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
         return 'assets/fundo.jpeg';
       case PetType.dragao:
         return 'assets/fundo.jpeg';
-      case PetType.gato:
+      case PetType.unicornio:
         return 'assets/fundo.jpeg';
       default:
         return '';

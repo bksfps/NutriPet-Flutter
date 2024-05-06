@@ -30,12 +30,12 @@ class _TelaLoginState extends State<TelaLogin> {
                   height: 30,
                 ),
                 textReusavel("Coloque usuário", Icons.person_outline, false,
-                    _userNameTextController),
+                    _userNameTextController, fontFamily: ''),
                 SizedBox(
                   height: 20,
                 ),
                 textReusavel("Coloque a senha", Icons.lock_outline, true,
-                    _passwordTextController),
+                    _passwordTextController, fontFamily: ''),
                 SizedBox(
                   height: 20,
                 ),

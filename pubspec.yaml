@@ -52,6 +52,10 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  fonts:
+    - family: PixelatedDisplay
+      fonts:
+        - asset: assets/fonts/PixelatedDisplay.ttf
   assets:
   - assets/pet_dinossauro.png
   - assets/pet_dragao.png
