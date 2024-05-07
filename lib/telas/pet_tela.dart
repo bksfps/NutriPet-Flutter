@@ -62,7 +62,7 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
                       fontFamily: 'PixelatedDisplay',
                     ),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 10),
                   Image.asset(_getImagePath()),
                   SizedBox(height: 20),
                 ],
@@ -100,11 +100,16 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Color.fromARGB(255, 18, 237, 102),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  CircleAvatar(
+                    backgroundColor: Colors.transparent,
+                    child: Icon(Icons.account_circle, color: Colors.black),
+                  ),
+                  SizedBox(height: 10),
                   Text('NOME DO PET: ${_pet.name.toUpperCase()}',
                       style: TextStyle(fontFamily: 'PixelatedDisplay')),
                   Text('NÍVEL DO PET: ${_pet.level}'.toUpperCase(),
@@ -113,6 +118,10 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
               ),
             ),
             ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                child: Icon(Icons.pets, color: Colors.black),
+              ),
               title: const Text('ALIMENTAR',
                   style: TextStyle(fontFamily: 'PixelatedDisplay')),
               onTap: () {
@@ -187,20 +196,33 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
         case PetType.dinossauro:
           return 'assets/dino/pet_dinossaurobravo.gif';
         case PetType.dragao:
-          return 'assets/pet_dragao_bravo.png';
+          return 'assets/dragao/pet_dragaobravo.gif';
         case PetType.unicornio:
-          return 'assets/unicornio_bravo.gif';
+          return 'assets/unicornio/pet_unicorniobravo.gif';
         default:
           return '';
       }
-    } else {
+    } 
+    else if (_pet.isHappy) {
+      switch (_pet.type) {
+        case PetType.dinossauro:
+          return 'assets/dino/pet_dinossaurofeliz.gif';
+        case PetType.dragao:
+          return 'assets/dragao/pet_dragaofeliz.gif';
+        case PetType.unicornio:
+          return 'assets/unicornio/pet_unicorniofeliz.gif';
+        default:
+          return '';
+      }
+    } 
+    else {
       switch (_pet.type) {
         case PetType.dinossauro:
           return 'assets/dino/pet_dinossauro.gif';
         case PetType.dragao:
-          return 'assets/pet_dragao.png';
+          return 'assets/dragao/pet_dragao.gif';
         case PetType.unicornio:
-          return 'assets/unicornio.gif';
+          return 'assets/unicornio/pet_unicornio.gif';
         default:
           return '';
       }

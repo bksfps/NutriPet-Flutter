@@ -15,6 +15,7 @@ class Pet {
   double forca;
   PetType type;
   bool isAngry;
+  bool isHappy;
 
   Pet({
     required this.name,
@@ -25,5 +26,6 @@ class Pet {
     required this.forca,
     required this.type,
     this.isAngry = false,
+    this.isHappy = false,
   });
 }

@@ -60,6 +60,13 @@ flutter:
   assets:
   - assets/dino/pet_dinossauro.gif
   - assets/dino/pet_dinossaurobravo.gif
+  - assets/dino/pet_dinossaurofeliz.gif
+  - assets/unicornio/pet_unicornio.gif
+  - assets/unicornio/pet_unicorniobravo.gif
+  - assets/unicornio/pet_unicorniofeliz.gif
+  - assets/dragao/pet_dragao.gif
+  - assets/dragao/pet_dragaobravo.gif
+  - assets/dragao/pet_dragaofeliz.gif
   - assets/fundo.jpeg
   - assets/come.png
   - assets/menu.png
