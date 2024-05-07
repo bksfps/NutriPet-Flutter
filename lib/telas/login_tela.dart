@@ -17,7 +17,7 @@ class _TelaLoginState extends State<TelaLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green, // Definindo a cor de fundo como verde
+      backgroundColor: Colors.green,
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -30,9 +30,9 @@ class _TelaLoginState extends State<TelaLogin> {
                   child: Text(
                     "NUTRIPET",
                     style: TextStyle(
-                      fontFamily: 'PixelatedDisplay', // Aplicando a fonte PixelatedDisplay
-                      fontSize: 30, // Definindo o tamanho da fonte
-                      color: Colors.black, // Definindo a cor do texto
+                      fontFamily: 'PixelatedDisplay',
+                      fontSize: 30,
+                      color: Colors.black,
                     ),
                   ),
                 ),

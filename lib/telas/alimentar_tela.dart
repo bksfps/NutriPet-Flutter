@@ -25,7 +25,7 @@ class _AlimentarTelaState extends State<AlimentarTela> {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            _showFoodDialog(context); //
+            _showFoodDialog(context);
           },
           child: Text('Selecionar Alimento'),
         ),

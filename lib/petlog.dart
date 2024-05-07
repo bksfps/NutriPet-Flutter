@@ -19,7 +19,7 @@ class PetLog {
       forca: 100,
       type: type,
     );
-    _feedCount = 0; // Inicialize o contador
+    _feedCount = 0;
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (_pet.alimentacao > 0) _pet.alimentacao -= 1;
       if (_pet.felicidade > 0) _pet.felicidade -= 1;
@@ -34,12 +34,9 @@ class PetLog {
       if (_pet.energia < 0) _pet.energia = 0;
       if (_pet.forca < 0) _pet.forca = 0;
 
-      // Verificar se a alimentação está abaixo de 30
       if (_pet.felicidade <= 30) {
-        // Marcar o pet como bravo
         _pet.isAngry = true;
       } else {
-        // Se a alimentação não estiver abaixo de 30, o pet não está bravo
         _pet.isAngry = false;
       }
       if (_pet.felicidade >= 70) {
