@@ -21,10 +21,10 @@ class PetLog {
     );
     _feedCount = 0; // Inicialize o contador
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      if (_pet.alimentacao > 0) _pet.alimentacao -= 1;
-      if (_pet.felicidade > 0) _pet.felicidade -= 1;
-      if (_pet.energia > 0) _pet.energia -= 1;
-      if (_pet.forca > 0) _pet.forca -= 1;
+      if (_pet.alimentacao > 0) _pet.alimentacao -= 10;
+      if (_pet.felicidade > 0) _pet.felicidade -= 10;
+      if (_pet.energia > 0) _pet.energia -= 10;
+      if (_pet.forca > 0) _pet.forca -= 10;
       if (_pet.alimentacao == 0) _pet.alimentacao = 0;
       if (_pet.felicidade == 0) _pet.felicidade = 0;
       if (_pet.energia == 0) _pet.energia = 0;
@@ -33,9 +33,17 @@ class PetLog {
       if (_pet.felicidade < 0) _pet.felicidade = 0;
       if (_pet.energia < 0) _pet.energia = 0;
       if (_pet.forca < 0) _pet.forca = 0;
+
+      // Verificar se a alimentação está abaixo de 30
+      if (_pet.alimentacao <= 30) {
+        // Marcar o pet como bravo
+        _pet.isAngry = true;
+      } else {
+        // Se a alimentação não estiver abaixo de 30, o pet não está bravo
+        _pet.isAngry = false;
+      }
     });
   }
-
 
   Pet get pet => _pet;
 
@@ -60,8 +68,7 @@ class PetLog {
 
     _feedCount++;
     if (_feedCount % 5 == 0) {
-      _pet.level++; 
+      _pet.level++;
     }
-    
   }
 }

@@ -25,6 +25,20 @@ class _TelaLoginState extends State<TelaLogin> {
             child: Column(
               children: <Widget>[
                 SizedBox(height: MediaQuery.of(context).padding.top),
+                Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "NUTRIPET",
+                    style: TextStyle(
+                      fontFamily: 'PixelatedDisplay', // Aplicando a fonte PixelatedDisplay
+                      fontSize: 30, // Definindo o tamanho da fonte
+                      color: Colors.black, // Definindo a cor do texto
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 logoWidget("assets/logo.png"),
                 SizedBox(
                   height: 30,

@@ -24,8 +24,8 @@ class _TelaCadastroState extends State<TelaCadastro> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: const Text(
-          "Cadastre-se",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          "CADASTRO",
+          style: TextStyle(fontSize: 24, fontFamily: 'PixelatedDisplay'),
         ),
       ),
       body: Container(

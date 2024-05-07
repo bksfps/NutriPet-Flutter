@@ -39,6 +39,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -57,17 +58,14 @@ flutter:
       fonts:
         - asset: assets/fonts/PixelatedDisplay.ttf
   assets:
-  - assets/pet_dinossauro.png
-  - assets/pet_dragao.png
-  - assets/pet_gato.png
+  - assets/dino/pet_dinossauro.gif
+  - assets/dino/pet_dinossaurobravo.gif
   - assets/fundo.jpeg
   - assets/come.png
   - assets/menu.png
   - assets/egg1.png
   - assets/egg2.png
   - assets/egg3.png
-  - assets/pet_bravo.png
-  - assets/pet_feliz.png
   - assets/logo.png
 
   # The following line ensures that the Material Icons font is
@@ -105,3 +103,8 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/logo.png"

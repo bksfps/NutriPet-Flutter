@@ -14,6 +14,7 @@ class Pet {
   double energia;
   double forca;
   PetType type;
+  bool isAngry;
 
   Pet({
     required this.name,
@@ -23,5 +24,6 @@ class Pet {
     required this.energia,
     required this.forca,
     required this.type,
+    this.isAngry = false,
   });
 }
