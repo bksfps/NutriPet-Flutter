@@ -79,7 +79,7 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
                 border: Border.all(color: Colors.black, width: 4), // Aumentando a grossura da borda preta
               ),
               child: Container(
-                color: Colors.green, // Definindo a cor do container
+                color: Color.fromARGB(255, 226, 227, 180), // Definindo a cor do container
                 padding: EdgeInsets.all(6),
                 child: Column(
                   children: [
