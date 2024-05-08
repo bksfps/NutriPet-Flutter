@@ -1,5 +1,3 @@
-//parte gráfica da tela de alimentar
-
 import 'package:flutter/material.dart';
 import 'package:nutripet1/alimentos.dart';
 import 'package:nutripet1/petlog.dart';
@@ -20,63 +18,125 @@ class _AlimentarTelaState extends State<AlimentarTela> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Alimentar Pet'),
+        title: Text(
+          'ALIMENTAR PET',
+          style: TextStyle(fontFamily: 'PixelatedDisplay'),
+        ),
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            _showFoodDialog(context);
-          },
-          child: Text('Selecionar Alimento'),
+      body: ListView(
+        children: [
+          _buildFoodCategory("PÃES, MASSAS E CEREAIS", Alimentos.paesMassasCereais),
+          _buildFoodCategory("FRUTAS", Alimentos.frutas),
+          _buildFoodCategory("LEGUMES", Alimentos.legumes),
+          _buildFoodCategory("LEITE E DERIVADOS", Alimentos.leiteDerivados),
+          _buildFoodCategory("CARNES E OVOS", Alimentos.carnesOvos),
+          _buildFoodCategory("DOCES E GULOSEIMAS", Alimentos.docesGuloseimas),
+          _buildFoodCategory("SALGADOS DE PADARIA", Alimentos.salgadosPadaria),
+          _buildFoodCategory("REFRIGERANTES E SUCOS", Alimentos.refrigerantesSucos),
+          _buildFoodCategory("SUCOS NATURAIS", Alimentos.sucosNaturais),
+          _buildFoodCategory("EMBUTIDOS", Alimentos.embutidos),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFoodCategory(String category, List<Alimento> foodList) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            category,
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, fontFamily: 'PixelatedDisplay'),
+          ),
+        ),
+        Column(
+          children: [
+            for (var alimento in foodList)
+              _buildFoodButton(alimento),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFoodButton(Alimento alimento) {
+    return ElevatedButton(
+      onPressed: () {
+        setState(() {
+          _selectedFood = alimento;
+        });
+        _showConfirmationDialog(context);
+      },
+      child: ListTile(
+        leading: Icon(Icons.food_bank),
+        title: Text(
+          alimento.nome.toUpperCase(),
+          style: TextStyle(fontFamily: 'PixelatedDisplay'),
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "ENERGIA: ${alimento.energia}",
+              style: TextStyle(fontFamily: 'PixelatedDisplay'),
+            ),
+            Text(
+              "ALIMENTAÇÃO: ${alimento.alimentacao}",
+              style: TextStyle(fontFamily: 'PixelatedDisplay'),
+            ),
+            Text(
+              "FELICIDADE: ${alimento.felicidade}",
+              style: TextStyle(fontFamily: 'PixelatedDisplay'),
+            ),
+            Text(
+              "FORÇA: ${alimento.forca}",
+              style: TextStyle(fontFamily: 'PixelatedDisplay'),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  void _showFoodDialog(BuildContext context) {
+  void _showConfirmationDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Selecione um Alimento'),
-          content: SingleChildScrollView(
-            child: Column(
-              children: [
-                _buildFoodButtonList(Alimentos.paesMassasCereais),
-                _buildFoodButtonList(Alimentos.frutas),
-                _buildFoodButtonList(Alimentos.legumes),
-                _buildFoodButtonList(Alimentos.leiteDerivados),
-                _buildFoodButtonList(Alimentos.carnesOvos),
-                _buildFoodButtonList(Alimentos.docesGuloseimas),
-                _buildFoodButtonList(Alimentos.salgadosPadaria),
-                _buildFoodButtonList(Alimentos.refrigerantesSucos),
-                _buildFoodButtonList(Alimentos.sucosNaturais),
-                _buildFoodButtonList(Alimentos.embutidos),
-              ],
-            ),
+          title: Text(
+            'CONFIRMAR ALIMENTAÇÃO',
+            style: TextStyle(fontFamily: 'PixelatedDisplay'),
           ),
+          content: Text(
+            'Você deseja alimentar o pet com ${_selectedFood!.nome.toUpperCase()}?',
+            style: TextStyle(fontFamily: 'PixelatedDisplay'),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                'CANCELAR',
+                style: TextStyle(fontFamily: 'PixelatedDisplay'),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                _feedPetAndShowNotification(context);
+                Navigator.pop(context);
+                Navigator.pop(context); // Fechar tela de alimentação
+              },
+              child: Text(
+                'CONFIRMAR',
+                style: TextStyle(fontFamily: 'PixelatedDisplay'),
+              ),
+            ),
+          ],
         );
       },
-    );
-  }
-
-  Widget _buildFoodButtonList(List<Alimento> foodList) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        for (var alimento in foodList)
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                _selectedFood = alimento;
-              });
-              Navigator.of(context).pop();
-              _feedPetAndShowNotification(context);
-            },
-            child: Text(alimento.nome),
-          ),
-        SizedBox(height: 10),
-      ],
     );
   }
 
@@ -85,12 +145,14 @@ class _AlimentarTelaState extends State<AlimentarTela> {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text("Pet foi alimentado com sucesso"),
+        content: Text(
+          "PET FOI ALIMENTADO COM SUCESSO",
+          style: TextStyle(fontFamily: 'PixelatedDisplay'),
+        ),
         duration: Duration(seconds: 3),
       ),
     );
 
-    Navigator.pop(context);
-    Navigator.pop(context);
+    Navigator.pop(context); // Fechar o drawer
   }
 }
