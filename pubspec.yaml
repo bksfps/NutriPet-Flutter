@@ -68,8 +68,11 @@ flutter:
   - assets/dragao/pet_dragao.gif
   - assets/dragao/pet_dragaobravo.gif
   - assets/dragao/pet_dragaofeliz.gif
+  - assets/icons/alimentacao.png
+  - assets/icons/energia.png
+  - assets/icons/felicidade.png
+  - assets/icons/forca.png
   - assets/fundo.jpeg
-  - assets/come.png
   - assets/menu.png
   - assets/egg1.png
   - assets/egg2.png

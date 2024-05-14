@@ -39,60 +39,72 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.blue,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              'NUTRIPET',
+              style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'PixelatedDisplay',
+              ),
+            ),
+          ],
+        ),
       ),
       extendBodyBehindAppBar: true,
-      body: Stack(
-        children: [
-          Container(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(_getBackgroundImagePath()),
                 fit: BoxFit.cover,
               ),
             ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '${_pet.name.toUpperCase()}',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: 'PixelatedDisplay',
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: MediaQuery.of(context).padding.top), // Adiciona espaço para a barra de status
+                SizedBox(height: 50),
+                Text(
+                  '${_pet.name.toUpperCase()}',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'PixelatedDisplay',
+                  ),
+                ),
+                SizedBox(height: 10),
+                Image.asset(_getImagePath()),
+                SizedBox(height: 20),
+                Expanded(
+                  child: Center(
+                    child: Container(
+                      height: 320,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black, width: 4),
+                        color: Color.fromARGB(255, 226, 227, 180),
+                      ),
+                      padding: EdgeInsets.all(6),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          _buildProgressBar('ALIMENTAÇÃO', _pet.alimentacao),
+                          _buildProgressBar('FELICIDADE', _pet.felicidade),
+                          _buildProgressBar('ENERGIA', _pet.energia),
+                          _buildProgressBar('FORÇA', _pet.forca),
+                        ],
+                      ),
                     ),
                   ),
-                  SizedBox(height: 10),
-                  Image.asset(_getImagePath()),
-                  SizedBox(height: 20),
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              height: 210,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 4),
-              ),
-              child: Container(
-                color: Color.fromARGB(255, 226, 227, 180),
-                padding: EdgeInsets.all(6),
-                child: Column(
-                  children: [
-                    _buildProgressBar('ALIMENTAÇÃO', _pet.alimentacao),
-                    _buildProgressBar('FELICIDADE', _pet.felicidade),
-                    _buildProgressBar('ENERGIA', _pet.energia),
-                    _buildProgressBar('FORÇA', _pet.forca),
-                  ],
                 ),
-              ),
+              ],
             ),
           ),
-        ],
+        ),
       ),
       drawer: Drawer(
         child: ListView(
@@ -100,7 +112,7 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 18, 237, 102),
+                color: Colors.blue,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -141,47 +153,80 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
 
   Widget _buildProgressBar(String label, double value) {
     Color color = value > 30 ? Colors.green : Colors.red;
+    String iconImagePath;
+    String labelText;
+    if (label == 'ALIMENTAÇÃO') {
+      iconImagePath = 'assets/icons/alimentacao.png';
+      labelText = 'ALIMENTAÇÃO';
+    } else if (label == 'FELICIDADE') {
+      iconImagePath = 'assets/icons/felicidade.png';
+      labelText = 'FELICIDADE';
+    } else if (label == 'ENERGIA') {
+      iconImagePath = 'assets/icons/energia.png';
+      labelText = 'ENERGIA';
+    } else if (label == 'FORÇA') {
+      iconImagePath = 'assets/icons/forca.png';
+      labelText = 'FORÇA';
+    } else {
+      iconImagePath = '';
+      labelText = '';
+    }
+    
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
         children: [
-          Stack(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                height: 10,
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.circular(5),
-                ),
+              Image.asset(
+                iconImagePath,
+                height: 25,
+                width: 25,
               ),
-              FractionallySizedBox(
-                widthFactor: value / 100,
-                child: Container(
-                  height: 10,
-                  decoration: BoxDecoration(
-                    color: color,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      '${value.toInt()}',
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontFamily: 'PixelatedDisplay',
+              SizedBox(width: 10),
+              Expanded(
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 14,
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(5),
                       ),
                     ),
-                  ),
+                    FractionallySizedBox(
+                      widthFactor: value / 100,
+                      child: Container(
+                        height: 14,
+                        decoration: BoxDecoration(
+                          color: color,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            '${value.toInt()}',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontFamily: 'PixelatedDisplay',
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
-          SizedBox(height: 5),
+          SizedBox(height: 10),
           Text(
-            '$label',
+            labelText,
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 11,
+              fontSize: 13,
               fontFamily: 'PixelatedDisplay',
             ),
           ),
@@ -202,8 +247,7 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
         default:
           return '';
       }
-    } 
-    else if (_pet.isHappy) {
+    } else if (_pet.isHappy) {
       switch (_pet.type) {
         case PetType.dinossauro:
           return 'assets/dino/pet_dinossaurofeliz.gif';
@@ -214,8 +258,7 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
         default:
           return '';
       }
-    } 
-    else {
+    } else {
       switch (_pet.type) {
         case PetType.dinossauro:
           return 'assets/dino/pet_dinossauro.gif';
