@@ -3,6 +3,7 @@ import 'package:nutripet1/pet.dart';
 import 'package:nutripet1/petlog.dart';
 import 'alimentar_tela.dart';
 import 'dart:async';
+import 'loteria_tela.dart';
 
 class ExibicaoPetScreen extends StatefulWidget {
   final PetLog petLog;
@@ -144,7 +145,21 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
                           AlimentarTela(petLog: widget.petLog)),
                 );
               },
-            )
+            ),
+            ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                child: Icon(Icons.star, color: Colors.black),
+              ),
+              title: const Text('LOTERIA',
+                  style: TextStyle(fontFamily: 'PixelatedDisplay')),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoteriaTela(widget.petLog)),
+                );
+              },
+            ),
           ],
         ),
       ),

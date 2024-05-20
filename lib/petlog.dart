@@ -8,6 +8,7 @@ class PetLog {
   late Pet _pet;
   late Timer _timer;
   late int _feedCount;
+  Set<int> _generatedLevels = {};
 
   PetLog({required String petName, required PetType type}) {
     _pet = Pet(
@@ -72,6 +73,18 @@ class PetLog {
     _feedCount++;
     if (_feedCount % 5 == 0) {
       _pet.level++;
+    }
+  }
+  void acertarNumeroPremiado() {
+    _pet.alimentacao += 5;
+    _pet.felicidade += 5;
+    _pet.energia += 5;
+    _pet.forca += 5;
+  }
+
+  void generateLoteria() {
+    if (!_generatedLevels.contains(_pet.level)) {
+      _generatedLevels.add(_pet.level);
     }
   }
 }
