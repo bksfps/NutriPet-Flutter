@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nutripet1/pet.dart';
 import 'package:nutripet1/petlog.dart';
+import 'package:nutripet1/telas/ConfigTela.dart';
 import 'alimentar_tela.dart';
 import 'dart:async';
 import 'loteria_tela.dart';
@@ -69,7 +70,10 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: MediaQuery.of(context).padding.top), // Adiciona espaço para a barra de status
+                SizedBox(
+                    height: MediaQuery.of(context)
+                        .padding
+                        .top), // Adiciona espaço para a barra de status
                 SizedBox(height: 50),
                 Text(
                   '${_pet.name.toUpperCase()}',
@@ -156,10 +160,30 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LoteriaTela(widget.petLog)),
+                  MaterialPageRoute(
+                      builder: (context) => LoteriaTela(widget.petLog)),
                 );
               },
             ),
+            ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                child: Icon(
+                  Icons.settings,
+                  color: Colors.black,
+                ),
+              ),
+              title: const Text(
+                'CONFIGURAÇÕES',
+                style: TextStyle(fontFamily: 'PixelatedDisplay'),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ConfigTela())
+                );
+              },
+            )
           ],
         ),
       ),
@@ -186,7 +210,7 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
       iconImagePath = '';
       labelText = '';
     }
-    
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
@@ -290,11 +314,11 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
   String _getBackgroundImagePath() {
     switch (_pet.type) {
       case PetType.dinossauro:
-        return 'assets/fundo.jpeg';
+        return 'assets/fundo.png';
       case PetType.dragao:
-        return 'assets/fundo.jpeg';
+        return 'assets/fundo.png';
       case PetType.unicornio:
-        return 'assets/fundo.jpeg';
+        return 'assets/fundo.png';
       default:
         return '';
     }

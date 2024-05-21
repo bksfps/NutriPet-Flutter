@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:nutripet1/alimentos.dart';
 import 'package:nutripet1/petlog.dart';
 
@@ -13,6 +14,8 @@ class AlimentarTela extends StatefulWidget {
 
 class _AlimentarTelaState extends State<AlimentarTela> {
   Alimento? _selectedFood;
+  final ImagePicker _picker = ImagePicker();
+  XFile? _imageFile;
 
   @override
   Widget build(BuildContext context) {
@@ -124,10 +127,13 @@ class _AlimentarTelaState extends State<AlimentarTela> {
               ),
             ),
             TextButton(
-              onPressed: () {
-                _feedPetAndShowNotification(context);
-                Navigator.pop(context);
-                Navigator.pop(context); // Fechar tela de alimentação
+              onPressed: () async {
+                await _pickImageFromCamera();
+                if (_imageFile != null) {
+                  _feedPetAndShowNotification(context);
+                  Navigator.pop(context);
+                  Navigator.pop(context); // Fechar tela de alimentação
+                }
               },
               child: Text(
                 'CONFIRMAR',
@@ -138,6 +144,13 @@ class _AlimentarTelaState extends State<AlimentarTela> {
         );
       },
     );
+  }
+
+  Future<void> _pickImageFromCamera() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+    setState(() {
+      _imageFile = image;
+    });
   }
 
   void _feedPetAndShowNotification(BuildContext context) {
