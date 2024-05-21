@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:nutripet1/telas/login_tela.dart';
+import 'package:nutripet1/telas/widgetUsavel/theme_provider.dart'; // Import do provedor de tema
 
 void main() async {
   SystemChrome.setPreferredOrientations([
@@ -8,29 +10,26 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pet Simulator',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      // initialRoute: '/',
-      // routes: {
-      //   '/': (context) => SelecaoOvosScreen(),
-      //   '/exibicao_pet': (context) {
-      //     PetLog petLog = PetLog(
-      //       petName: '',
-      //       type: PetType.dinossauro,
-      //     );
-      //     return ExibicaoPetScreen(petLog: petLog);
-      //   },
-      // },
-      home: const TelaLogin(),
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        return MaterialApp(
+          title: 'Pet Simulator',
+          theme:
+              themeProvider.isDarkTheme ? ThemeData.dark() : ThemeData.light(),
+          home: const TelaLogin(),
+        );
+      },
     );
   }
 }

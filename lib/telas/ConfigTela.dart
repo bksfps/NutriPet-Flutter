@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:nutripet1/telas/widgetUsavel/theme_provider.dart'; // Import do provedor de tema
 
 class ConfigTela extends StatefulWidget {
   @override
@@ -7,10 +9,11 @@ class ConfigTela extends StatefulWidget {
 
 class _ConfigTelaState extends State<ConfigTela> {
   bool _notificacoesAtivadas = true;
-  bool _temaEscuro = false;
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -38,11 +41,9 @@ class _ConfigTelaState extends State<ConfigTela> {
               'Tema Escuro',
               style: TextStyle(fontFamily: 'PixelatedDisplay'),
             ),
-            value: _temaEscuro,
+            value: themeProvider.isDarkTheme,
             onChanged: (bool value) {
-              setState(() {
-                _temaEscuro = value;
-              });
+              themeProvider.toggleTheme();
             },
           ),
           ListTile(
