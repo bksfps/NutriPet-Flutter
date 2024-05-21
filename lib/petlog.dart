@@ -9,6 +9,7 @@ class PetLog {
   late Timer _timer;
   late int _feedCount;
   Set<int> _generatedLevels = {};
+  int loteriaRodadas = 3; // Inicializa com 3 rodadas
 
   PetLog({required String petName, required PetType type}) {
     _pet = Pet(
@@ -42,8 +43,7 @@ class PetLog {
       }
       if (_pet.felicidade >= 70) {
         _pet.isHappy = true;
-      }
-      else {
+      } else {
         _pet.isHappy = false;
       }
     });
@@ -73,8 +73,10 @@ class PetLog {
     _feedCount++;
     if (_feedCount % 5 == 0) {
       _pet.level++;
+      loteriaRodadas++; // Ganha uma rodada extra ao subir de nível
     }
   }
+
   void acertarNumeroPremiado() {
     _pet.alimentacao += 5;
     _pet.felicidade += 5;
@@ -82,9 +84,11 @@ class PetLog {
     _pet.forca += 5;
   }
 
+  bool hasGeneratedLoteria() {
+    return _generatedLevels.contains(_pet.level);
+  }
+
   void generateLoteria() {
-    if (!_generatedLevels.contains(_pet.level)) {
-      _generatedLevels.add(_pet.level);
-    }
+    _generatedLevels.add(_pet.level);
   }
 }

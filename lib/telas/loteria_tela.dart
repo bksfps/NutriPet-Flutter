@@ -5,13 +5,11 @@ import 'dart:math';
 class Loteria {
   List<int> numeros = [];
   int? numeroPremiado;
-  int geracoesRestantes = 3; // Inicializa com 3 rodadas
 
   void gerarNumeros() {
     Random random = Random();
     numeros = List.generate(5, (_) => random.nextInt(100) + 1);
     sortearNumeroPremiado();
-    geracoesRestantes--; // Reduz o número de rodadas restantes
   }
 
   void sortearNumeroPremiado() {
@@ -47,13 +45,21 @@ class _LoteriaTelaState extends State<LoteriaTela> {
 
   void _gerarNovosNumeros() {
     setState(() {
-      if (_petLog.generatedLoteria()) {
-        loteria.geracoesRestantes++;
+      if (_petLog.loteriaRodadas > 0) {
+        _petLog.loteriaRodadas--;
+        loteria.gerarNumeros();
+        resultado = '';
+        numeroEscolhido = null;
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'VOCÊ NÃO TEM MAIS RODADAS RESTANTES!',
+              style: TextStyle(fontFamily: 'PixelatedDisplay'),
+            ),
+          ),
+        );
       }
-      _petLog.generateLoteria();
-      loteria.gerarNumeros();
-      resultado = '';
-      numeroEscolhido = null;
     });
   }
 
@@ -91,14 +97,21 @@ class _LoteriaTelaState extends State<LoteriaTela> {
               'LOTERIA',
               style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, fontFamily: 'PixelatedDisplay'),
             ),
+            Center(
+              child: Text(
+                'GERE NÚMEROS ALEATÓRIOS PARA GANHAR PONTOS DE STATUS PARA SEU PET!',
+                style: TextStyle(fontSize: 15, fontFamily: 'PixelatedDisplay'),
+                textAlign: TextAlign.center,
+              ),
+            ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: loteria.geracoesRestantes > 0 ? _gerarNovosNumeros : null,
+              onPressed: _petLog.loteriaRodadas > 0 ? _gerarNovosNumeros : null,
               child: Text('GERAR NÚMEROS', style: TextStyle(fontFamily: 'PixelatedDisplay')),
             ),
             SizedBox(height: 20),
             Text(
-              'Gerações Restantes: ${loteria.geracoesRestantes}',
+              'RODADAS RESTANTES: ${_petLog.loteriaRodadas}',
               style: TextStyle(fontSize: 18, fontFamily: 'PixelatedDisplay'),
             ),
             SizedBox(height: 20),
@@ -119,15 +132,21 @@ class _LoteriaTelaState extends State<LoteriaTela> {
               ),
             ],
             SizedBox(height: 20),
-            Text(
-              resultado,
-              style: TextStyle(fontSize: 18, color: numeroEscolhido == loteria.getNumeroPremiado() ? Colors.green : Colors.red, fontFamily: 'PixelatedDisplay'),
+            Center(
+              child: Text(
+                resultado,
+                style: TextStyle(fontSize: 18, color: numeroEscolhido == loteria.getNumeroPremiado() ? Colors.green : Colors.red, fontFamily: 'PixelatedDisplay'),
+                textAlign: TextAlign.center,
+              ),
             ),
             if (numeroEscolhido != null) ...[
               SizedBox(height: 10),
-              Text(
-                'NÚMERO PREMIADO: ${loteria.getNumeroPremiado()}',
-                style: TextStyle(fontSize: 18, color: Colors.blue, fontFamily: 'PixelatedDisplay'),
+              Center(
+                child: Text(
+                  'NÚMERO PREMIADO: ${loteria.getNumeroPremiado()}',
+                  style: TextStyle(fontSize: 18, color: Colors.blue, fontFamily: 'PixelatedDisplay'),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ],
           ],
