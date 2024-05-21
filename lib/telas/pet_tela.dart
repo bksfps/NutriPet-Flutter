@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:nutripet1/pet.dart';
 import 'package:nutripet1/petlog.dart';
-import 'package:nutripet1/telas/ConfigTela.dart';
-import 'alimentar_tela.dart';
+import 'package:nutripet1/telas/config_tela.dart';
+import 'package:nutripet1/telas/alimentar_tela.dart';
+import 'package:nutripet1/telas/loteria_tela.dart';
+import 'package:nutripet1/telas/missoes_tela.dart';
 import 'dart:async';
-import 'loteria_tela.dart';
 
 class ExibicaoPetScreen extends StatefulWidget {
   final PetLog petLog;
@@ -169,21 +170,33 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
               leading: CircleAvatar(
                 backgroundColor: Colors.transparent,
                 child: Icon(
-                  Icons.settings,
+                  Icons.assignment,
                   color: Colors.black,
                 ),
               ),
               title: const Text(
-                'CONFIGURAÇÕES',
+                'MISSÕES',
                 style: TextStyle(fontFamily: 'PixelatedDisplay'),
               ),
               onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MissoesTela()));
+              },
+            ),
+            ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                child: Icon(Icons.settings, color: Colors.black),
+              ),
+              title: const Text('CONFIGURAÇÕES',
+                  style: TextStyle(fontFamily: 'PixelatedDisplay')),
+              onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ConfigTela())
+                  MaterialPageRoute(builder: (context) => ConfigTela()),
                 );
               },
-            )
+            ),
           ],
         ),
       ),
