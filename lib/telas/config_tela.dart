@@ -55,12 +55,12 @@ class _ConfigTelaState extends State<ConfigTela> {
             onTap: () {
               showAboutDialog(
                 context: context,
-                applicationName: 'NutriPet',
+                applicationName: 'Feedit',
                 applicationVersion: '1.0.0',
                 applicationIcon: Icon(Icons.pets),
                 children: [
                   Text(
-                    'NutriPet é um aplicativo para monitorar a alimentação e saúde dos seus pets virtuais!',
+                    'Feedit é um aplicativo para monitorar a alimentação e saúde dos seus pets virtuais!',
                     style: TextStyle(fontFamily: 'PixelatedDisplay'),
                   ),
                 ],

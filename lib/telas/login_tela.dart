@@ -28,7 +28,7 @@ class _TelaLoginState extends State<TelaLogin> {
                 Container(
                   alignment: Alignment.center,
                   child: Text(
-                    "NUTRIPET",
+                    "FEEDIT",
                     style: TextStyle(
                       fontFamily: 'PixelatedDisplay',
                       fontSize: 30,

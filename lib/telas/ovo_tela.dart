@@ -14,7 +14,7 @@ class SelecaoOvosScreen extends StatelessWidget {
           children: [
             _buildPetTypeButton(context, 'DINOSSAURO', PetType.dinossauro),
             SizedBox(height: 20),
-            _buildPetTypeButton(context, 'DRAGON', PetType.dragao),
+            _buildPetTypeButton(context, 'DRAGÃO', PetType.dragao),
             SizedBox(height: 20),
             _buildPetTypeButton(context, 'UNICORNIO', PetType.unicornio),
           ],

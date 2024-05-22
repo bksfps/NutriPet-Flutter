@@ -34,13 +34,13 @@ class Missoes {
       recompensa: 40,
     ),
     Missao(
-      titulo: 'BRINCAR COM O PET',
-      descricao: 'PASSE UM TEMPO DE QUALIDADE BRINCANDO COM SEU PET.',
+      titulo: 'COMER ALIMENTOS COM ALIMENTAÇÃO 2 OU MAIS',
+      descricao: 'CONSUMA ALIMENTOS COM ALIMENTAÇÃO 2 OU MAIS DURANTE A SEMANA.',
       recompensa: 25,
     ),
     Missao(
-      titulo: 'DAR UM BANHO NO PET',
-      descricao: 'DÊ UM BANHO NO SEU PET.',
+      titulo: 'CHEGAR EM 100 EM QUALQUER STATUS 3 VEZES',
+      descricao: 'ATIGINGIR QUALQUER STATUS EM 100 3 VEZES DURANTE A SEMANA.',
       recompensa: 35,
     ),
     Missao(

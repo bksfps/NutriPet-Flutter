@@ -47,7 +47,7 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              'NUTRIPET',
+              'FEEDIT',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'PixelatedDisplay',

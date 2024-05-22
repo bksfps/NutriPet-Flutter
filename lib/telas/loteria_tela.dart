@@ -1,6 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:nutripet1/petlog.dart';
 import 'dart:math';
+import 'package:nutripet1/petlog.dart';
+
+class Loteria {
+  List<int> numeros = [];
+  int? numeroPremiado;
+
+  void gerarNumeros() {
+    Random random = Random();
+    numeros = List.generate(5, (_) => random.nextInt(100) + 1);
+    sortearNumeroPremiado();
+  }
+
+  void sortearNumeroPremiado() {
+    Random random = Random();
+    numeroPremiado = numeros[random.nextInt(numeros.length)];
+  }
+
+  List<int> getNumeros() => numeros;
+  int? getNumeroPremiado() => numeroPremiado;
+}
 
 class LoteriaTela extends StatefulWidget {
   final PetLog petLog;
@@ -11,18 +30,26 @@ class LoteriaTela extends StatefulWidget {
 }
 
 class _LoteriaTelaState extends State<LoteriaTela> {
+  late Loteria loteria;
   String resultado = '';
   int? numeroEscolhido;
   PetLog _petLog;
 
   _LoteriaTelaState(this._petLog);
 
+  @override
+  void initState() {
+    super.initState();
+    loteria = Loteria();
+  }
+
   void _gerarNovosNumeros() {
     setState(() {
       if (_petLog.loteriaRodadas > 0) {
-        _petLog.loteriaRodadas--;
+        loteria.gerarNumeros();
         resultado = '';
         numeroEscolhido = null;
+        _petLog.loteriaRodadas--;
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -39,7 +66,7 @@ class _LoteriaTelaState extends State<LoteriaTela> {
   void _escolherNumero(int numero) {
     setState(() {
       numeroEscolhido = numero;
-      if (numero == 42 /* Número premiado */) {
+      if (numero == loteria.getNumeroPremiado()) {
         _petLog.acertarNumeroPremiado();
         resultado = 'PARABÉNS! VOCÊ ESCOLHEU O NÚMERO PREMIADO!';
         ScaffoldMessenger.of(context).showSnackBar(
@@ -70,16 +97,16 @@ class _LoteriaTelaState extends State<LoteriaTela> {
               'LOTERIA',
               style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, fontFamily: 'PixelatedDisplay'),
             ),
-            Center(
-              child: Text(
-                'GERE NÚMEROS ALEATÓRIOS PARA GANHAR PONTOS DE STATUS PARA SEU PET!',
-                style: TextStyle(fontSize: 15, fontFamily: 'PixelatedDisplay'),
-                textAlign: TextAlign.center,
-              ),
+            SizedBox(height: 10),
+            Text(
+              'GERE NÚMEROS ALEATÓRIOS PARA GANHAR PONTOS DE STATUS PARA SEU PET!\n'
+              'SE VOCÊ ESCOLHER O NÚMERO PREMIADO, SEU PET GANHARÁ 5 PONTOS EM ALIMENTAÇÃO, FELICIDADE, ENERGIA E FORÇA.',
+              style: TextStyle(fontSize: 15, fontFamily: 'PixelatedDisplay'),
+              textAlign: TextAlign.center,
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _petLog.loteriaRodadas > 0 ? _gerarNovosNumeros : null,
+              onPressed: _gerarNovosNumeros,
               child: Text('GERAR NÚMEROS', style: TextStyle(fontFamily: 'PixelatedDisplay')),
             ),
             SizedBox(height: 20),
@@ -88,7 +115,7 @@ class _LoteriaTelaState extends State<LoteriaTela> {
               style: TextStyle(fontSize: 18, fontFamily: 'PixelatedDisplay'),
             ),
             SizedBox(height: 20),
-            if (numeroEscolhido == null) ...[
+            if (loteria.getNumeros().isNotEmpty && numeroEscolhido == null) ...[
               Text(
                 'ESCOLHA UM NÚMERO:',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, fontFamily: 'PixelatedDisplay'),
@@ -96,30 +123,24 @@ class _LoteriaTelaState extends State<LoteriaTela> {
               SizedBox(height: 10),
               Wrap(
                 spacing: 10,
-                children: List.generate(5, (index) {
+                children: loteria.getNumeros().map((numero) {
                   return ActionChip(
-                    label: Text((index + 1).toString().toUpperCase(), style: TextStyle(fontFamily: 'PixelatedDisplay')),
-                    onPressed: () => _escolherNumero(index + 1),
+                    label: Text(numero.toString().toUpperCase(), style: TextStyle(fontFamily: 'PixelatedDisplay')),
+                    onPressed: () => _escolherNumero(numero),
                   );
-                }),
+                }).toList(),
               ),
             ],
             SizedBox(height: 20),
-            Center(
-              child: Text(
-                resultado,
-                style: TextStyle(fontSize: 18, color: numeroEscolhido == 42 /* Número premiado */ ? Colors.green : Colors.red, fontFamily: 'PixelatedDisplay'),
-                textAlign: TextAlign.center,
-              ),
+            Text(
+              resultado,
+              style: TextStyle(fontSize: 18, color: numeroEscolhido == loteria.getNumeroPremiado() ? Colors.green : Colors.red, fontFamily: 'PixelatedDisplay'),
             ),
             if (numeroEscolhido != null) ...[
               SizedBox(height: 10),
-              Center(
-                child: Text(
-                  'NÚMERO PREMIADO: 42',
-                  style: TextStyle(fontSize: 18, color: Colors.blue, fontFamily: 'PixelatedDisplay'),
-                  textAlign: TextAlign.center,
-                ),
+              Text(
+                'NÚMERO PREMIADO: ${loteria.getNumeroPremiado()}',
+                style: TextStyle(fontSize: 18, color: Colors.blue, fontFamily: 'PixelatedDisplay'),
               ),
             ],
           ],
