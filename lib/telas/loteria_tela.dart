@@ -8,7 +8,7 @@ class Loteria {
 
   void gerarNumeros() {
     Random random = Random();
-    numeros = List.generate(5, (_) => random.nextInt(100) + 1);
+    numeros = List.generate(4, (_) => random.nextInt(100) + 1);
     sortearNumeroPremiado();
   }
 
