@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:nutripet1/pet.dart';
 import 'package:nutripet1/petlog.dart';
 import 'package:nutripet1/telas/config_tela.dart';
 import 'package:nutripet1/telas/alimentar_tela.dart';
+import 'package:nutripet1/telas/login_tela.dart';
 import 'package:nutripet1/telas/loteria_tela.dart';
 import 'package:nutripet1/telas/missoes_tela.dart';
 import 'dart:async';
@@ -195,6 +198,22 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
                   context,
                   MaterialPageRoute(builder: (context) => ConfigTela()),
                 );
+              },
+            ),
+            Divider(), // Divider before the "Sair" button
+            ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                child: Icon(Icons.exit_to_app, color: Colors.black),
+              ),
+              title: const Text('SAIR',
+                  style: TextStyle(fontFamily: 'PixelatedDisplay')),
+              onTap: () {
+                FirebaseAuth.instance.signOut().then((value) {
+                  print("Saiu!");
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => TelaLogin()));
+                });
               },
             ),
           ],

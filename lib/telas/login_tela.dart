@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nutripet1/telas/cadastro_tela.dart';
 import 'package:nutripet1/telas/ovo_tela.dart';
@@ -12,7 +13,7 @@ class TelaLogin extends StatefulWidget {
 
 class _TelaLoginState extends State<TelaLogin> {
   TextEditingController _passwordTextController = TextEditingController();
-  TextEditingController _userNameTextController = TextEditingController();
+  TextEditingController _emailTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,21 +44,32 @@ class _TelaLoginState extends State<TelaLogin> {
                 SizedBox(
                   height: 30,
                 ),
-                textReusavel("Coloque usuário", Icons.person_outline, false,
-                    _userNameTextController, fontFamily: ''),
+                textReusavel("Coloque o Email", Icons.person_outline, false,
+                    _emailTextController,
+                    fontFamily: ''),
                 SizedBox(
                   height: 20,
                 ),
                 textReusavel("Coloque a senha", Icons.lock_outline, true,
-                    _passwordTextController, fontFamily: ''),
+                    _passwordTextController,
+                    fontFamily: ''),
                 SizedBox(
                   height: 20,
                 ),
                 signInSignUpButton(context, true, () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => SelecaoOvosScreen()));
+                  FirebaseAuth.instance
+                      .signInWithEmailAndPassword(
+                          email: _emailTextController.text,
+                          password: _passwordTextController.text)
+                      .then((value) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SelecaoOvosScreen()));
+                      })
+                      .onError((error, stackTrace) {
+                        print("Erro ${error.toString()}");
+                      });
                 }),
                 signUpOption()
               ],

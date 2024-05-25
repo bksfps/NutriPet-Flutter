@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "5987804415",
+    "project_id": "nutripetb",
+    "storage_bucket": "nutripetb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:5987804415:android:9c43d67b1fc4c19bbd18ca",
+        "android_client_info": {
+          "package_name": "com.feedit.nutripet1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnreLnkFk9GkXptl_CAVK9QMNDkHCZM9s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
