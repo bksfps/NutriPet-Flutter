@@ -5,6 +5,7 @@ import 'package:nutripet1/pet.dart';
 import 'package:nutripet1/petlog.dart';
 import 'package:nutripet1/telas/config_tela.dart';
 import 'package:nutripet1/telas/alimentar_tela.dart';
+import 'package:nutripet1/telas/cronometro/tela_cronometro.dart';
 import 'package:nutripet1/telas/login_tela.dart';
 import 'package:nutripet1/telas/loteria_tela.dart';
 import 'package:nutripet1/telas/missoes_tela.dart';
@@ -151,6 +152,23 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
                   MaterialPageRoute(
                       builder: (context) =>
                           AlimentarTela(petLog: widget.petLog)),
+                );
+              },
+            ),
+            ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                child: Icon(
+                  Icons.timer,
+                  color: Colors.black,
+                ),
+              ),
+              title: const Text('EXERCITAR',
+                  style: TextStyle(fontFamily: 'PixelatedDisplay')),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TelaCronometo(petLog: widget.petLog,)),
                 );
               },
             ),
