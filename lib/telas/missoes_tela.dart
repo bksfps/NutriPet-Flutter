@@ -7,7 +7,7 @@ class MissoesTela extends StatefulWidget {
 }
 
 class _MissoesTelaState extends State<MissoesTela> {
-  List<Missao> _missoesExibidas = Missoes.obterMissoesAleatorias(3); // Obter as 3 missões aleatórias uma vez
+  List<Missao> _missoesExibidas = Missoes.obterMissoesAleatorias(3);
   DateTime _dataAtual = DateTime.now();
 
   @override
@@ -51,9 +51,9 @@ class _MissoesTelaState extends State<MissoesTela> {
                   title: Text(missao.titulo, style: TextStyle(fontFamily: 'PixelatedDisplay')),
                   subtitle: Text(missao.descricao, style: TextStyle(fontFamily: 'PixelatedDisplay')),
                   trailing: missao.concluida
-                      ? Icon(Icons.check, color: Colors.green) // Ícone de check verde indicando que a missão foi concluída
+                      ? Icon(Icons.check, color: Colors.green)
                       : Text('${missao.recompensa} pontos', style: TextStyle(fontFamily: 'PixelatedDisplay')),
-                  tileColor: missao.concluida ? Colors.green.withOpacity(0.3) : null, // Cor de fundo se a missão estiver concluída
+                  tileColor: missao.concluida ? Colors.green.withOpacity(0.3) : null,
                 );
               },
             ),
