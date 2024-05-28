@@ -37,47 +37,117 @@ class _TelaLoginState extends State<TelaLogin> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: 10),
                 logoWidget("assets/logo.png"),
-                SizedBox(
-                  height: 30,
-                ),
+                SizedBox(height: 30),
                 textReusavel("Coloque o Email", Icons.person_outline, false,
                     _emailTextController,
                     fontFamily: ''),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
                 textReusavel("Coloque a senha", Icons.lock_outline, true,
                     _passwordTextController,
                     fontFamily: ''),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
                 signInSignUpButton(context, true, () {
                   FirebaseAuth.instance
                       .signInWithEmailAndPassword(
                           email: _emailTextController.text,
                           password: _passwordTextController.text)
                       .then((value) {
+                        _showSnackBar(context, "Login efetuado com sucesso!", Colors.black);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => SelecaoOvosScreen()));
                       })
-                      .onError((error, stackTrace) {
-                        print("Erro ${error.toString()}");
+                      .catchError((error) {
+                        String errorMessage = _getErrorMessage(error.code);
+                        _showSnackBar(context, "Erro: $errorMessage", Colors.red);
                       });
                 }),
-                signUpOption()
+                signUpOption(),
+                SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () {
+                    _resetPasswordDialog(context);
+                  },
+                  child: const Text(
+                    "Esqueceu a senha?",
+                    style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold),
+                  ),
+                ),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  void _showSnackBar(BuildContext context, String message, Color color) {
+    final snackBar = SnackBar(
+      content: Text(message),
+      backgroundColor: color,
+      duration: Duration(seconds: 3),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  String _getErrorMessage(String errorCode) {
+    switch (errorCode) {
+      case 'invalid-email':
+        return 'O email fornecido é inválido.';
+      case 'user-disabled':
+        return 'Este usuário foi desativado.';
+      case 'user-not-found':
+        return 'Nenhum usuário encontrado com este email.';
+      case 'wrong-password':
+        return 'A senha fornecida está incorreta.';
+      default:
+        return 'Ocorreu um erro desconhecido.';
+    }
+  }
+
+  void _resetPasswordDialog(BuildContext context) {
+    final TextEditingController _resetEmailController = TextEditingController();
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Redefinir Senha"),
+        content: TextField(
+          controller: _resetEmailController,
+          keyboardType: TextInputType.emailAddress,
+          decoration: InputDecoration(hintText: "Coloque seu Email"),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text("Cancelar"),
+          ),
+          TextButton(
+            onPressed: () {
+              _resetPassword(_resetEmailController.text);
+              Navigator.of(context).pop();
+            },
+            child: Text("Redefinir"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _resetPassword(String email) {
+    FirebaseAuth.instance
+        .sendPasswordResetEmail(email: email)
+        .then((value) {
+          _showSnackBar(context, "Email de redefinição de senha enviado!", Colors.black);
+        })
+        .catchError((error) {
+          String errorMessage = _getErrorMessage(error.code);
+          _showSnackBar(context, "Erro: $errorMessage", Colors.red);
+        });
   }
 
   Row signUpOption() {

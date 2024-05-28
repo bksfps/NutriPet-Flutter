@@ -53,6 +53,7 @@ class SelecaoOvosScreen extends StatelessWidget {
 
   void _selectPet(BuildContext context, PetType type) async {
     final nameController = TextEditingController();
+    bool isNameValid = false;
     await showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -76,8 +77,17 @@ class SelecaoOvosScreen extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
-                _navigateToExibicaoPetScreen(context, type, nameController.text);
+                if (nameController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Por favor, insira o nome do pet.'),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                } else {
+                  isNameValid = true;
+                  Navigator.of(context).pop();
+                }
               },
               style: TextButton.styleFrom(
                 foregroundColor: Colors.black,
@@ -88,6 +98,10 @@ class SelecaoOvosScreen extends StatelessWidget {
         );
       },
     );
+
+    if (isNameValid) {
+      _navigateToExibicaoPetScreen(context, type, nameController.text);
+    }
   }
 
   void _navigateToExibicaoPetScreen(BuildContext context, PetType type, String name) {

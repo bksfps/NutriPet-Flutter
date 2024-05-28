@@ -113,7 +113,7 @@ class _AlimentarTelaState extends State<AlimentarTela> {
             style: TextStyle(fontFamily: 'PixelatedDisplay'),
           ),
           content: Text(
-            'Você deseja alimentar o pet com ${_selectedFood!.nome.toUpperCase()}?',
+            'VOCÊ DESEJAR ALIMENTAR O PET COM ${_selectedFood!.nome.toUpperCase()}?',
             style: TextStyle(fontFamily: 'PixelatedDisplay'),
           ),
           actions: [
