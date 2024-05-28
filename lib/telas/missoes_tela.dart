@@ -9,7 +9,6 @@ class MissoesTela extends StatefulWidget {
 class _MissoesTelaState extends State<MissoesTela> {
   List<Missao> _missoesExibidas = Missoes.obterMissoesAleatorias(3); // Obter as 3 missões aleatórias uma vez
   DateTime _dataAtual = DateTime.now();
-  bool _atualizouMissoes = false;
 
   @override
   void initState() {
@@ -22,7 +21,6 @@ class _MissoesTelaState extends State<MissoesTela> {
     if (novaData.weekday == DateTime.monday && _dataAtual.day != novaData.day) {
       setState(() {
         _dataAtual = novaData;
-        _atualizouMissoes = false;
       });
     }
   }
