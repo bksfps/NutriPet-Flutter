@@ -2,8 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:nutripet1/pet.dart';
 import 'package:nutripet1/petlog.dart';
 import 'package:nutripet1/telas/pet_tela.dart';
+import 'package:audioplayers/audioplayers.dart';
 
-class SelecaoOvosScreen extends StatelessWidget {
+class SelecaoOvosScreen extends StatefulWidget {
+  @override
+  _SelecaoOvosScreenState createState() => _SelecaoOvosScreenState();
+}
+
+class _SelecaoOvosScreenState extends State<SelecaoOvosScreen> {
+  late AudioPlayer backgroundMusicPlayer;
+
+  @override
+  void initState() {
+    super.initState();
+    backgroundMusicPlayer = AudioPlayer();
+    _playBackgroundMusic();
+  }
+
+  @override
+  void dispose() {
+    backgroundMusicPlayer.dispose();
+    super.dispose();
+  }
+
+  Future<void> _playBackgroundMusic() async {
+    await backgroundMusicPlayer.setSource(AssetSource('audio/ovo_music.mp3'));
+    await backgroundMusicPlayer.setReleaseMode(ReleaseMode.loop); // Configura para loop
+    await backgroundMusicPlayer.setVolume(0.5); // Configura volume para 50%
+    await backgroundMusicPlayer.resume();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

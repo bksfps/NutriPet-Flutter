@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:nutripet1/petlog.dart';
 
 class Loteria {
@@ -34,6 +35,7 @@ class _LoteriaTelaState extends State<LoteriaTela> {
   String resultado = '';
   int? numeroEscolhido;
   PetLog _petLog;
+  AudioPlayer audioPlayer = AudioPlayer();
 
   _LoteriaTelaState(this._petLog);
 
@@ -41,6 +43,24 @@ class _LoteriaTelaState extends State<LoteriaTela> {
   void initState() {
     super.initState();
     loteria = Loteria();
+    _playBackgroundMusic();
+  }
+
+  @override
+  void dispose() {
+    audioPlayer.dispose();
+    super.dispose();
+  }
+
+  Future<void> _playBackgroundMusic() async {
+    await audioPlayer.setSource(AssetSource('audio/loteria_music.mp3'));
+    await audioPlayer.setReleaseMode(ReleaseMode.loop); // Configura para loop
+    await audioPlayer.setVolume(0.5); // Configura volume para 50%
+    await audioPlayer.resume();
+  }
+
+  void _setVolume(double volume) {
+    audioPlayer.setVolume(volume);
   }
 
   void _gerarNovosNumeros() {
@@ -103,6 +123,12 @@ class _LoteriaTelaState extends State<LoteriaTela> {
               'SE VOCÊ ESCOLHER O NÚMERO PREMIADO, SEU PET GANHARÁ 5 PONTOS EM ALIMENTAÇÃO, FELICIDADE, ENERGIA E FORÇA.',
               style: TextStyle(fontSize: 15, fontFamily: 'PixelatedDisplay'),
               textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 20),
+            Image.asset(
+              'assets/loteria.png',
+              width: 200,
+              height: 200,
             ),
             SizedBox(height: 20),
             ElevatedButton(

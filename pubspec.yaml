@@ -31,6 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   firebase_core: ^2.31.1
+  audioplayers: ^6.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -81,7 +82,10 @@ flutter:
   - assets/egg2.png
   - assets/egg3.png
   - assets/logo.png
-
+  - assets/loteria.png
+  - assets/audio/loteria_music.mp3
+  - assets/audio/fundo_music.mp3
+  - assets/audio/ovo_music.mp3
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
