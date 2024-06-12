@@ -67,7 +67,7 @@ class _SelecaoOvosScreenState extends State<SelecaoOvosScreen> {
           onPressed: () => _selectPet(context, type),
           style: ElevatedButton.styleFrom(
             foregroundColor: Colors.black, backgroundColor: Colors.transparent,
-            side: BorderSide(color: Colors.black),
+            
           ),
           child: SizedBox(
             height: 80,
