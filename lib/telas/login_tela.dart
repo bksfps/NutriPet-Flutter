@@ -40,11 +40,11 @@ class _TelaLoginState extends State<TelaLogin> {
                 SizedBox(height: 10),
                 logoWidget("assets/logo.png"),
                 SizedBox(height: 30),
-                textReusavel("Coloque o Email", Icons.person_outline, false,
+                textReusavel("Digite seu Email", Icons.person_outline, false,
                     _emailTextController,
                     fontFamily: ''),
                 SizedBox(height: 20),
-                textReusavel("Coloque a senha", Icons.lock_outline, true,
+                textReusavel("Digite sua senha", Icons.lock_outline, true,
                     _passwordTextController,
                     fontFamily: ''),
                 SizedBox(height: 20),
@@ -117,7 +117,7 @@ class _TelaLoginState extends State<TelaLogin> {
         content: TextField(
           controller: _resetEmailController,
           keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(hintText: "Coloque seu Email"),
+          decoration: InputDecoration(hintText: "Digite seu Email"),
         ),
         actions: [
           TextButton(
