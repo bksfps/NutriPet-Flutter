@@ -9,7 +9,7 @@ class PetLog {
   late Timer _timer;
   late int _feedCount;
   Set<int> _generatedLevels = {};
-  int loteriaRodadas = 3; // Inicializa com 3 rodadas
+  int loteriaRodadas = 3;
 
   PetLog({required String petName, required PetType type}) {
     _pet = Pet(
@@ -22,7 +22,7 @@ class PetLog {
       type: type,
     );
     _feedCount = 0;
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(Duration(seconds: 15), (timer) {
       if (_pet.alimentacao > 0) _pet.alimentacao -= 1;
       if (_pet.felicidade > 0) _pet.felicidade -= 1;
       if (_pet.energia > 0) _pet.energia -= 1;
@@ -73,7 +73,7 @@ class PetLog {
     _feedCount++;
     if (_feedCount % 5 == 0) {
       _pet.level++;
-      loteriaRodadas++; // Ganha uma rodada extra ao subir de nível
+      loteriaRodadas++;
     }
   }
 

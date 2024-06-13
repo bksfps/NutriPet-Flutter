@@ -10,7 +10,7 @@ class Missao {
 }
 
 class Missoes {
-  static int _contadorLoteria = 0; // Adiciona um contador para a loteria
+  static int _contadorLoteria = 0;
 
   static List<Missao> missoesSemanais = [
     Missao(
@@ -52,18 +52,17 @@ class Missoes {
 
   static void incrementarContadorLoteria() {
     _contadorLoteria++;
-    _verificarMissaoConcluida(); // Chama a função para verificar se a missão foi concluída
+    _verificarMissaoConcluida();
   }
 
   static void _verificarMissaoConcluida() {
     for (var missao in missoesSemanais) {
-      if (missao.titulo == 'JOGAR NA LOTERIA 3 VEZES' && _contadorLoteria >= 3) { // Verifica se o usuário girou a loteria 3 vezes
-        missao.concluida = true; // Marca a missão como concluída
+      if (missao.titulo == 'JOGAR NA LOTERIA 3 VEZES' && _contadorLoteria >= 3) {
+        missao.concluida = true; 
       }
     }
   }
 
-  // Função para obter missões aleatórias
   static List<Missao> obterMissoesAleatorias(int quantidade) {
     List<Missao> missoesAleatorias = [];
 

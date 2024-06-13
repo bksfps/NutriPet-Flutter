@@ -54,8 +54,8 @@ class _LoteriaTelaState extends State<LoteriaTela> {
 
   Future<void> _playBackgroundMusic() async {
     await audioPlayer.setSource(AssetSource('audio/loteria_music.mp3'));
-    await audioPlayer.setReleaseMode(ReleaseMode.loop); // Configura para loop
-    await audioPlayer.setVolume(0.5); // Configura volume para 50%
+    await audioPlayer.setReleaseMode(ReleaseMode.loop);
+    await audioPlayer.setVolume(0.5);
     await audioPlayer.resume();
   }
 

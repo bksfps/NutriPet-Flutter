@@ -132,7 +132,7 @@ class _AlimentarTelaState extends State<AlimentarTela> {
                 if (_imageFile != null) {
                   _feedPetAndShowNotification(context);
                   Navigator.pop(context);
-                  Navigator.pop(context); // Fechar tela de alimentação
+                  Navigator.pop(context);
                 }
               },
               child: Text(
@@ -166,6 +166,6 @@ class _AlimentarTelaState extends State<AlimentarTela> {
       ),
     );
 
-    Navigator.pop(context); // Fechar o drawer
+    Navigator.pop(context);
   }
 }

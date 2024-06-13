@@ -77,7 +77,7 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
                 SizedBox(
                     height: MediaQuery.of(context)
                         .padding
-                        .top), // Adiciona espaço para a barra de status
+                        .top),
                 SizedBox(height: 50),
                 Text(
                   '${_pet.name.toUpperCase()}',
@@ -217,7 +217,7 @@ class _ExibicaoPetScreenState extends State<ExibicaoPetScreen> {
                 );
               },
             ),
-            Divider(), // Divider before the "Sair" button
+            Divider(),
             ListTile(
               leading: CircleAvatar(
                 backgroundColor: Colors.transparent,

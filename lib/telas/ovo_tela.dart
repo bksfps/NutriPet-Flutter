@@ -27,8 +27,8 @@ class _SelecaoOvosScreenState extends State<SelecaoOvosScreen> {
 
   Future<void> _playBackgroundMusic() async {
     await backgroundMusicPlayer.setSource(AssetSource('audio/ovo_music.mp3'));
-    await backgroundMusicPlayer.setReleaseMode(ReleaseMode.loop); // Configura para loop
-    await backgroundMusicPlayer.setVolume(0.5); // Configura volume para 50%
+    await backgroundMusicPlayer.setReleaseMode(ReleaseMode.loop); 
+    await backgroundMusicPlayer.setVolume(0.5);
     await backgroundMusicPlayer.resume();
   }
 

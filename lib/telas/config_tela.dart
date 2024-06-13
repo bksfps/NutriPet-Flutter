@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:nutripet1/telas/widgetUsavel/theme_provider.dart'; // Import do provedor de tema
+import 'package:nutripet1/telas/widgetUsavel/theme_provider.dart';
 
 class ConfigTela extends StatefulWidget {
   @override
